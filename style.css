@@ -1,16 +1,20 @@
+/* =========================================================
+   MEMBERS' DINING ROOM
+   PREMIUM LUXURY MENU DESIGN
+   ========================================================= */
+
 :root {
-  --bg: #11100e;
-  --card: #191714;
+  --bg: #0b0a08;
+  --card: rgba(18, 17, 14, 0.78);
   --cream: #f4efe5;
   --muted: #aaa397;
-  --gold: #b89b63;
-  --line: rgba(244, 239, 229, 0.14);
+  --gold: #c6a15b;
+  --gold-light: #e0c27a;
+  --line: rgba(224, 194, 122, 0.28);
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -18,82 +22,355 @@ html {
 }
 
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--cream);
-  font-family: Inter, sans-serif;
+  font-family: "Inter", sans-serif;
   overflow-x: hidden;
 }
 
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: var(--bg);
+/* =========================================================
+   GLOBAL BACKGROUND
+   ========================================================= */
+
+body {
+  background:
+    linear-gradient(
+      rgba(8, 7, 5, 0.93),
+      rgba(8, 7, 5, 0.96)
+    ),
+    url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2200&q=90")
+    center / cover fixed;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  position: relative;
+  min-height: 92vh !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 5, 4, 0.92) 0%,
+      rgba(5, 5, 4, 0.68) 45%,
+      rgba(5, 5, 4, 0.28) 100%
+    ),
+    url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2400&q=95")
+    center / cover no-repeat !important;
+
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  overflow: hidden;
 }
 
-.intro.hide {
-  opacity: 0;
-  visibility: hidden;
+/* Dark cinematic layer */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.45)
+    );
+
+  pointer-events: none;
 }
 
-.crest {
-  width: 70px;
-  height: 70px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--gold);
-  font-size: 30px;
-  animation: crestIn 1.2s ease forwards;
+.hero-content {
+  position: relative;
+  z-index: 2;
 }
 
-.intro p {
-  margin-top: 28px;
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: var(--muted);
-  animation: fadeUp 1s 0.3s both;
-}
+/* =========================================================
+   HEADINGS
+   ========================================================= */
 
-.intro h1 {
+h1,
+h2,
+h3,
+h4 {
   font-family: "Cormorant Garamond", serif;
-  font-size: 38px;
   font-weight: 600;
-  margin-top: 10px;
-  animation: fadeUp 1s 0.5s both;
 }
 
-.intro-line {
-  width: 0;
+h1,
+h2 {
+  color: var(--cream);
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* =========================================================
+   GOLD DETAILS
+   ========================================================= */
+
+.gold,
+.gold-text {
+  color: var(--gold);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   MENU BACKGROUND
+   ========================================================= */
+
+.menu,
+.menu-section,
+section[class*="menu"] {
+  position: relative;
+
+  background:
+    linear-gradient(
+      rgba(8, 7, 5, 0.86),
+      rgba(8, 7, 5, 0.91)
+    ),
+    url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=90")
+    center / cover fixed !important;
+}
+
+/* =========================================================
+   STARTERS IMAGE
+   ========================================================= */
+
+#starters,
+[id*="starter"] {
+  position: relative;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 6, 5, 0.88),
+      rgba(7, 6, 5, 0.58)
+    ),
+    url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=2200&q=90")
+    center / cover no-repeat !important;
+}
+
+/* =========================================================
+   MAIN COURSE IMAGE
+   ========================================================= */
+
+#main,
+#main-course,
+[id*="main"] {
+  position: relative;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 6, 5, 0.90),
+      rgba(7, 6, 5, 0.60)
+    ),
+    url("https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=2200&q=90")
+    center / cover no-repeat !important;
+}
+
+/* =========================================================
+   DESSERT IMAGE
+   ========================================================= */
+
+#dessert,
+[id*="dessert"] {
+  position: relative;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 6, 5, 0.88),
+      rgba(7, 6, 5, 0.58)
+    ),
+    url("https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=2200&q=90")
+    center / cover no-repeat !important;
+}
+
+/* =========================================================
+   INFO / WESTMINSTER IMAGE
+   ========================================================= */
+
+#info,
+[id*="info"] {
+  position: relative;
+
+  background:
+    linear-gradient(
+      rgba(7, 6, 5, 0.72),
+      rgba(7, 6, 5, 0.88)
+    ),
+    url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2400&q=90")
+    center / cover no-repeat !important;
+}
+
+/* =========================================================
+   DISH CARDS
+   ========================================================= */
+
+.dish {
+  position: relative;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(25, 23, 19, 0.78),
+      rgba(8, 8, 7, 0.68)
+    ) !important;
+
+  border: 1px solid var(--line) !important;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease;
+
+  overflow: hidden;
+}
+
+.dish::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,0.04),
+      transparent 45%
+    );
+
+  pointer-events: none;
+}
+
+.dish:hover {
+  transform: translateY(-4px);
+  border-color: rgba(224,194,122,0.6) !important;
+}
+
+/* =========================================================
+   CATEGORY NAVIGATION
+   ========================================================= */
+
+.category-nav,
+nav {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.category-nav {
+  background:
+    rgba(8, 7, 5, 0.90) !important;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.category-nav a {
+  color: var(--muted);
+  transition: color 0.25s ease;
+}
+
+.category-nav a:hover,
+.category-nav a.active {
+  color: var(--gold-light);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn,
+button {
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   SECTION TITLES
+   ========================================================= */
+
+.section-title {
+  position: relative;
+  text-align: center;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+
+  width: 55px;
   height: 1px;
+
+  margin: 18px auto;
+
   background: var(--gold);
-  margin-top: 25px;
-  animation: lineGrow 1s 0.8s forwards;
 }
 
-@keyframes crestIn {
-  from {
-    transform: scale(0.5) rotate(-20deg);
-    opacity: 0;
-  }
+/* =========================================================
+   ALLERGEN / INFO ITEMS
+   ========================================================= */
 
-  to {
-    transform: scale(1) rotate(0);
-    opacity: 1;
-  }
+.info,
+.info-box {
+  background: rgba(12, 11, 9, 0.68);
+
+  border:
+    1px solid var(--line);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-@keyframes fadeUp {
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+  background:
+    linear-gradient(
+      rgba(5, 5, 4, 0.86),
+      rgba(5, 5, 4, 0.94)
+    ),
+    url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90")
+    center / cover no-repeat !important;
+
+  border-top:
+    1px solid var(--line);
+}
+
+/* =========================================================
+   REVEAL ANIMATION
+   ========================================================= */
+
+.dish,
+.reveal {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+@keyframes luxuryReveal {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(25px);
   }
 
   to {
@@ -102,523 +379,76 @@ body {
   }
 }
 
-@keyframes lineGrow {
-  to {
-    width: 90px;
-  }
-}
-
-/* Pizza loader */
-
-.loader {
-  position: fixed;
-  inset: 0;
-  z-index: 900;
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.loader.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.pizza {
-  position: relative;
-  width: 90px;
-  height: 90px;
-  animation: pizzaSpin 1.5s linear infinite;
-}
-
-.pizza-base {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 45px solid transparent;
-  border-right: 45px solid transparent;
-  border-top: 78px solid #d5a85d;
-  filter: drop-shadow(0 8px 5px rgba(0, 0, 0, 0.3));
-}
-
-.cheese {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 39px solid transparent;
-  border-right: 39px solid transparent;
-  border-top: 68px solid #e6c878;
-  left: 6px;
-  top: 0;
-}
-
-.pepper {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #9d4034;
-  z-index: 2;
-}
-
-.p1 {
-  left: 32px;
-  top: 20px;
-}
-
-.p2 {
-  left: 52px;
-  top: 40px;
-}
-
-.p3 {
-  left: 24px;
-  top: 47px;
-}
-
-.loader p {
-  margin-top: 30px;
-  color: var(--muted);
-  font-size: 13px;
-  letter-spacing: 1px;
-}
-
-@keyframes pizzaSpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Hero */
-
-.site {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.site.ready {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.hero {
-  min-height: 88vh;
-  padding: 24px 22px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background:
-    radial-gradient(
-      circle at 50% 40%,
-      rgba(184, 155, 99, 0.13),
-      transparent 38%
-    ),
-    var(--bg);
-}
-
-.topline {
-  display: flex;
-  justify-content: space-between;
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: var(--muted);
-}
-
-.hero-content {
-  text-align: center;
-  padding: 60px 10px;
-}
-
-.eyebrow {
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: var(--gold);
-  margin-bottom: 18px;
-}
-
-.hero h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(48px, 14vw, 76px);
-  line-height: 0.9;
-  font-weight: 600;
-}
-
-.hero h1 em {
-  color: var(--gold);
-  font-style: italic;
-}
-
-.hero-copy {
-  max-width: 320px;
-  margin: 25px auto 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.explore {
-  text-align: center;
-  color: var(--cream);
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
-.explore span {
-  display: block;
-  margin-top: 10px;
-  color: var(--gold);
-  font-size: 20px;
-  animation: bounce 1.5s infinite;
-}
-
-@keyframes bounce {
-  50% {
-    transform: translateY(6px);
-  }
-}
-
-/* Navigation */
-
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  overflow-x: auto;
-  background: rgba(17, 16, 14, 0.94);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.nav a {
-  flex: 1;
-  min-width: 100px;
-  text-align: center;
-  padding: 16px 8px;
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.nav a:hover {
-  color: var(--gold);
-}
-
-/* Menu */
-
-.menu {
-  padding: 70px 20px;
-  max-width: 720px;
-  margin: auto;
-}
-
-.section-intro {
-  text-align: center;
-  margin-bottom: 65px;
-}
-
-.section-intro h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 45px;
-  font-weight: 600;
-}
-
-.section-intro p {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
-  margin-top: 12px;
-}
-
-.menu-group {
-  margin-bottom: 75px;
-  scroll-margin-top: 80px;
-}
-
-.group-title {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.group-number {
-  color: var(--gold);
-  font-size: 10px;
-  letter-spacing: 2px;
-}
-
-.group-title h3 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 34px;
-  font-weight: 600;
-}
-
-.dish {
-  padding: 22px 0;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-.dish h4 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 23px;
-  font-weight: 600;
-}
-
-.dish p {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.7;
-  margin-top: 6px;
-  max-width: 500px;
-}
-
-.badge {
-  color: var(--gold);
-  border: 1px solid rgba(184, 155, 99, 0.4);
-  height: fit-content;
-  padding: 5px 7px;
-  font-size: 8px;
-  white-space: nowrap;
-}
-
-/* Info */
-
-.info {
-  margin: 0 20px 70px;
-  padding: 35px 25px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  text-align: center;
-}
-
-.info h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 36px;
-}
-
-.info > p {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.8;
-  margin-top: 12px;
-}
-
-.legend {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 25px;
-}
-
-.legend span {
-  color: var(--muted);
-  font-size: 9px;
-}
-
-.legend b {
-  color: var(--gold);
-}
-
-.demo-note {
-  margin-top: 25px !important;
-  font-size: 9px !important;
-  opacity: 0.65;
-}
-
-/* Footer */
-
-footer {
-  text-align: center;
-  padding: 60px 20px 45px;
-  border-top: 1px solid var(--line);
-}
-
-footer .mini-crest {
-  color: var(--gold);
-  font-size: 25px;
-}
-
-footer h3 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 24px;
-  margin-top: 12px;
-}
-
-footer p {
-  color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  margin-top: 8px;
-}
-
-footer small {
-  display: block;
-  color: #625e57;
-  margin-top: 35px;
-  font-size: 8px;
-}
-
-@media (min-width: 700px) {
-  .hero {
-    padding-left: 60px;
-    padding-right: 60px;
-  }
-
-  .menu {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-  }
-}
 /* =========================================================
-   PREMIUM PHOTOGRAPHIC BACKGROUNDS
-   Members' Dining Room
+   MOBILE
    ========================================================= */
 
-/* Overall page */
-body {
-  background:
-    linear-gradient(rgba(10, 9, 7, 0.90), rgba(10, 9, 7, 0.94)),
-    url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=85")
-    center / cover fixed !important;
-}
-
-/* HERO — elegant restaurant atmosphere */
-.hero {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(8, 7, 5, 0.88) 0%,
-      rgba(8, 7, 5, 0.58) 48%,
-      rgba(8, 7, 5, 0.25) 100%
-    ),
-    url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2200&q=90")
-    center / cover no-repeat !important;
-}
-
-/* Main menu area */
-.menu {
-  background:
-    linear-gradient(rgba(9, 8, 6, 0.88), rgba(9, 8, 6, 0.92)),
-    url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=85")
-    center / cover fixed !important;
-}
-
-/* Starters */
-#starters {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(8, 7, 5, 0.82),
-      rgba(8, 7, 5, 0.55)
-    ),
-    url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1800&q=85")
-    center / cover no-repeat !important;
-}
-
-/* Main course */
-#main {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(8, 7, 5, 0.84),
-      rgba(8, 7, 5, 0.58)
-    ),
-    url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=85")
-    center / cover no-repeat !important;
-}
-
-/* Dessert */
-#dessert {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(8, 7, 5, 0.82),
-      rgba(8, 7, 5, 0.55)
-    ),
-    url("https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=1800&q=85")
-    center / cover no-repeat !important;
-}
-
-/* Information / Westminster atmosphere */
-#info {
-  background:
-    linear-gradient(
-      rgba(8, 7, 5, 0.72),
-      rgba(8, 7, 5, 0.84)
-    ),
-    url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90")
-    center / cover no-repeat !important;
-}
-
-/* Menu cards — glass effect */
-.dish {
-  background: rgba(12, 11, 9, 0.58) !important;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border-color: rgba(196, 157, 76, 0.35) !important;
-}
-
-/* Category navigation */
-.category-nav {
-  background: rgba(8, 7, 5, 0.92) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-/* Subtle image depth */
-.hero::before,
-.menu::before,
-#starters::before,
-#main::before,
-#dessert::before,
-#info::before {
-  content: "";
-  pointer-events: none;
-}
-
-/* Mobile optimization */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
   body {
-    background-attachment: scroll !important;
+    background-attachment: scroll;
   }
 
   .hero {
-    min-height: 90vh !important;
-    background-position: 60% center !important;
+    min-height: 88vh !important;
+
+    background-position:
+      62% center !important;
   }
 
   #starters,
+  [id*="starter"] {
+    background-position:
+      center !important;
+  }
+
   #main,
-  #dessert {
-    background-position: center !important;
-    background-size: cover !important;
+  #main-course,
+  [id*="main"] {
+    background-position:
+      center !important;
+  }
+
+  #dessert,
+  [id*="dessert"] {
+    background-position:
+      center !important;
+  }
+
+  #info,
+  [id*="info"] {
+    background-position:
+      center !important;
   }
 
   .dish {
-    background: rgba(10, 9, 7, 0.72) !important;
+    background:
+      rgba(10, 9, 7, 0.78) !important;
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .hero {
+    min-height: 85vh !important;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  .dish {
+    padding: 18px !important;
   }
 }
