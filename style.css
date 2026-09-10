@@ -492,3 +492,133 @@ footer small {
     scroll-behavior: auto !important;
   }
 }
+/* =========================================================
+   PREMIUM PHOTOGRAPHIC BACKGROUNDS
+   Members' Dining Room
+   ========================================================= */
+
+/* Overall page */
+body {
+  background:
+    linear-gradient(rgba(10, 9, 7, 0.90), rgba(10, 9, 7, 0.94)),
+    url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=85")
+    center / cover fixed !important;
+}
+
+/* HERO — elegant restaurant atmosphere */
+.hero {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 7, 5, 0.88) 0%,
+      rgba(8, 7, 5, 0.58) 48%,
+      rgba(8, 7, 5, 0.25) 100%
+    ),
+    url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2200&q=90")
+    center / cover no-repeat !important;
+}
+
+/* Main menu area */
+.menu {
+  background:
+    linear-gradient(rgba(9, 8, 6, 0.88), rgba(9, 8, 6, 0.92)),
+    url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=85")
+    center / cover fixed !important;
+}
+
+/* Starters */
+#starters {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 7, 5, 0.82),
+      rgba(8, 7, 5, 0.55)
+    ),
+    url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1800&q=85")
+    center / cover no-repeat !important;
+}
+
+/* Main course */
+#main {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 7, 5, 0.84),
+      rgba(8, 7, 5, 0.58)
+    ),
+    url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=85")
+    center / cover no-repeat !important;
+}
+
+/* Dessert */
+#dessert {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 7, 5, 0.82),
+      rgba(8, 7, 5, 0.55)
+    ),
+    url("https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=1800&q=85")
+    center / cover no-repeat !important;
+}
+
+/* Information / Westminster atmosphere */
+#info {
+  background:
+    linear-gradient(
+      rgba(8, 7, 5, 0.72),
+      rgba(8, 7, 5, 0.84)
+    ),
+    url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90")
+    center / cover no-repeat !important;
+}
+
+/* Menu cards — glass effect */
+.dish {
+  background: rgba(12, 11, 9, 0.58) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-color: rgba(196, 157, 76, 0.35) !important;
+}
+
+/* Category navigation */
+.category-nav {
+  background: rgba(8, 7, 5, 0.92) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Subtle image depth */
+.hero::before,
+.menu::before,
+#starters::before,
+#main::before,
+#dessert::before,
+#info::before {
+  content: "";
+  pointer-events: none;
+}
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+
+  body {
+    background-attachment: scroll !important;
+  }
+
+  .hero {
+    min-height: 90vh !important;
+    background-position: 60% center !important;
+  }
+
+  #starters,
+  #main,
+  #dessert {
+    background-position: center !important;
+    background-size: cover !important;
+  }
+
+  .dish {
+    background: rgba(10, 9, 7, 0.72) !important;
+  }
+}
