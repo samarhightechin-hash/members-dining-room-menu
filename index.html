@@ -1,708 +1,1330 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090806">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<title>Members' Dining Room | Digital Menu</title>
 
-    <meta name="theme-color"
-        content="#0b0a08">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <meta name="description"
-        content="Members' Dining Room — Digital Menu at the House of Commons, Westminster.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <title>
-        Members' Dining Room | Digital Menu
-    </title>
+<style>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
+/* =====================================================
+   RESET
+===================================================== */
 
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet">
+html {
+    scroll-behavior: smooth;
+}
 
-    <!-- Main CSS -->
-    <link rel="stylesheet"
-        href="style.css">
+body {
+    background: #090806;
+    color: #f5efe3;
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #090806;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+.intro.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.intro-inner {
+    text-align: center;
+    padding: 30px;
+}
+
+.crest {
+    font-size: 38px;
+    color: #c9a45d;
+    margin-bottom: 25px;
+}
+
+.intro p {
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: #bca77c;
+    margin-bottom: 18px;
+}
+
+.intro h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 42px;
+    font-weight: 500;
+    color: #f5efe3;
+}
+
+.intro-line {
+    display: block;
+    width: 55px;
+    height: 1px;
+    background: #c9a45d;
+    margin: 25px auto 0;
+}
+
+
+/* =====================================================
+   PIZZA LOADER
+===================================================== */
+
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #090806;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.5s ease,
+        visibility 0.5s ease;
+}
+
+.loader.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader p {
+    margin-top: 28px;
+    color: #aaa397;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+
+/* Pizza */
+
+.pizza {
+    position: relative;
+    width: 100px;
+    height: 100px;
+
+    animation: pizzaSpin 2s linear infinite;
+}
+
+.pizza-base {
+    position: absolute;
+    width: 78px;
+    height: 78px;
+
+    left: 11px;
+    top: 11px;
+
+    background: #c78b45;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 7px #e3b06b;
+}
+
+.cheese {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+
+    left: 18px;
+    top: 18px;
+
+    background: #e5b83e;
+    border-radius: 50%;
+}
+
+.pepper {
+    position: absolute;
+
+    width: 13px;
+    height: 13px;
+
+    background: #9c3c2e;
+    border-radius: 50%;
+}
+
+.p1 {
+    left: 34px;
+    top: 30px;
+}
+
+.p2 {
+    left: 58px;
+    top: 50px;
+}
+
+.p3 {
+    left: 35px;
+    top: 61px;
+}
+
+@keyframes pizzaSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =====================================================
+   SITE
+===================================================== */
+
+.site {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease;
+}
+
+.site.ready {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    position: relative;
+
+    min-height: 92vh;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(5,5,4,0.90) 0%,
+            rgba(5,5,4,0.67) 45%,
+            rgba(5,5,4,0.25) 100%
+        ),
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2200&q=90");
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.10),
+            rgba(0,0,0,0.45)
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(850px, 90%);
+
+    padding: 70px 7%;
+}
+
+.eyebrow {
+    display: block;
+
+    color: #c9a45d;
+
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+
+    margin-bottom: 18px;
+}
+
+.hero-label {
+    display: block;
+
+    color: #b9b0a3;
+
+    font-size: 10px;
+    letter-spacing: 4px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(60px, 8vw, 110px);
+
+    line-height: 0.85;
+
+    font-weight: 500;
+
+    color: #f7f0e4;
+}
+
+.gold-line {
+    width: 60px;
+    height: 1px;
+
+    background: #c9a45d;
+
+    margin: 28px 0;
+}
+
+.hero-subtitle {
+    font-family: "Cormorant Garamond", serif;
+
+    color: #c9a45d;
+
+    font-size: 28px;
+    font-style: italic;
+
+    margin-bottom: 12px;
+}
+
+.hero-description {
+    max-width: 450px;
+
+    color: #d0c9be;
+
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.hero-button {
+    display: inline-flex;
+    gap: 25px;
+    align-items: center;
+
+    margin-top: 35px;
+
+    padding: 15px 22px;
+
+    border: 1px solid #c9a45d;
+
+    color: #f5efe3;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+
+    transition: 0.3s ease;
+}
+
+.hero-button:hover {
+    background: #c9a45d;
+    color: #090806;
+}
+
+
+/* =====================================================
+   CATEGORY NAV
+===================================================== */
+
+.category-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    background: rgba(9,8,6,0.94);
+
+    backdrop-filter: blur(16px);
+
+    border-bottom: 1px solid rgba(201,164,93,0.25);
+}
+
+.category-nav a {
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    color: #aaa397;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    border-right: 1px solid rgba(201,164,93,0.18);
+
+    transition: 0.3s ease;
+}
+
+.category-nav a:last-child {
+    border-right: none;
+}
+
+.category-nav a:hover {
+    color: #d8b96e;
+}
+
+.nav-icon {
+    color: #c9a45d;
+}
+
+
+/* =====================================================
+   MENU INTRO
+===================================================== */
+
+.menu-intro {
+    position: relative;
+
+    padding: 100px 25px 75px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(8,7,5,0.78),
+            rgba(8,7,5,0.88)
+        ),
+        url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=90");
+
+    background-position: center;
+    background-size: cover;
+}
+
+.menu-intro h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(45px, 6vw, 70px);
+
+    font-weight: 500;
+}
+
+.menu-intro p {
+    color: #b7b0a5;
+
+    line-height: 1.8;
+
+    font-size: 14px;
+}
+
+.menu-intro .gold-line {
+    margin: 25px auto 0;
+}
+
+
+/* =====================================================
+   MENU SECTIONS
+===================================================== */
+
+.menu-section {
+    position: relative;
+
+    min-height: 520px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 80px 7%;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#starters {
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(6,5,4,0.90),
+            rgba(6,5,4,0.55)
+        ),
+        url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=2200&q=90");
+}
+
+#main-course {
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(6,5,4,0.90),
+            rgba(6,5,4,0.55)
+        ),
+        url("https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=2200&q=90");
+}
+
+#dessert {
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(6,5,4,0.90),
+            rgba(6,5,4,0.52)
+        ),
+        url("https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=2200&q=90");
+}
+
+.section-content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: auto;
+}
+
+.section-number {
+    color: #c9a45d;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+.section-heading span {
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+.small-line {
+    width: 45px;
+    height: 1px;
+
+    background: #c9a45d;
+
+    margin: 18px 0 35px;
+}
+
+
+/* =====================================================
+   DISHES
+===================================================== */
+
+.dishes {
+    width: min(650px, 100%);
+}
+
+.dish {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 19px 18px;
+
+    margin-bottom: 5px;
+
+    background: rgba(12,11,9,0.70);
+
+    border-bottom: 1px solid rgba(201,164,93,0.22);
+
+    backdrop-filter: blur(7px);
+
+    transition: 0.3s ease;
+}
+
+.dish:hover {
+    background: rgba(25,23,19,0.86);
+    transform: translateX(5px);
+}
+
+.dish h3 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 24px;
+
+    font-weight: 500;
+
+    color: #f4eee2;
+}
+
+.dish p {
+    color: #aaa397;
+
+    font-size: 11px;
+
+    margin-top: 3px;
+}
+
+.tag {
+    flex-shrink: 0;
+
+    color: #d6b56c;
+
+    border: 1px solid rgba(214,181,108,0.55);
+
+    padding: 5px 8px;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   INFORMATION
+===================================================== */
+
+.info-section {
+    position: relative;
+
+    padding: 100px 25px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(7,6,5,0.70),
+            rgba(7,6,5,0.88)
+        ),
+        url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2400&q=90");
+
+    background-position: center;
+    background-size: cover;
+}
+
+.info-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 800px;
+
+    margin: auto;
+}
+
+.info-section h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 60px;
+
+    font-weight: 500;
+}
+
+.info-section > .info-content > p {
+    max-width: 600px;
+
+    margin: 15px auto 30px;
+
+    color: #c0b9ae;
+
+    line-height: 1.8;
+}
+
+.legend {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.legend-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #c0b9ae;
+
+    font-size: 11px;
+}
+
+.legend-icon {
+    display: inline-flex;
+
+    width: 30px;
+    height: 30px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #c9a45d;
+
+    border-radius: 50%;
+
+    color: #d8b96e;
+
+    font-size: 9px;
+}
+
+.demo-note {
+    max-width: 500px;
+
+    margin: 45px auto 0;
+
+    padding: 20px;
+
+    border: 1px solid rgba(201,164,93,0.25);
+
+    background: rgba(5,5,4,0.45);
+}
+
+.demo-note strong {
+    color: #d8b96e;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 22px;
+}
+
+.demo-note p {
+    color: #aaa397;
+
+    font-size: 11px;
+
+    margin-top: 7px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    position: relative;
+
+    padding: 65px 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(5,5,4,0.82),
+            rgba(5,5,4,0.94)
+        ),
+        url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90");
+
+    background-position: center;
+    background-size: cover;
+
+    border-top: 1px solid rgba(201,164,93,0.25);
+}
+
+.footer-mark {
+    color: #c9a45d;
+    font-size: 28px;
+}
+
+footer h3 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 27px;
+
+    font-weight: 500;
+
+    margin-top: 10px;
+}
+
+.footer-location {
+    color: #999187;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-top: 8px;
+}
+
+.footer-line {
+    width: 45px;
+    height: 1px;
+
+    background: #c9a45d;
+
+    margin: 25px auto;
+}
+
+.footer-brand {
+    color: #777169;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .hero {
+        min-height: 88vh;
+
+        background-position: 62% center;
+    }
+
+    .hero-content {
+        padding: 50px 25px;
+    }
+
+    .hero h1 {
+        font-size: 62px;
+    }
+
+    .hero-subtitle {
+        font-size: 25px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    .category-nav {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .category-nav a {
+        min-height: 70px;
+
+        flex-direction: column;
+
+        gap: 5px;
+
+        font-size: 8px;
+
+        letter-spacing: 1.5px;
+
+        text-align: center;
+    }
+
+    .menu-intro {
+        padding: 75px 20px 60px;
+    }
+
+    .menu-section {
+        min-height: 600px;
+
+        padding: 70px 20px;
+
+        background-position: center;
+    }
+
+    .section-content {
+        width: 100%;
+    }
+
+    .dish {
+        padding: 17px 14px;
+    }
+
+    .dish h3 {
+        font-size: 22px;
+    }
+
+    .info-section {
+        padding: 75px 20px;
+    }
+
+    .info-section h2 {
+        font-size: 48px;
+    }
+
+    .legend {
+        gap: 18px 12px;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .hero h1 {
+        font-size: 54px;
+    }
+
+    .hero-subtitle {
+        font-size: 22px;
+    }
+
+    .category-nav a {
+        font-size: 7px;
+    }
+
+    .dish h3 {
+        font-size: 20px;
+    }
+}
+
+</style>
 </head>
 
 
 <body>
 
-    <!-- =====================================================
-         INTRO SCREEN
-         ===================================================== -->
 
-    <div class="intro"
-        id="intro">
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
-        <div class="intro-inner">
+<div class="intro" id="intro">
 
-            <div class="crest">
-                ✦
-            </div>
+    <div class="intro-inner">
 
-            <p>
-                THE HOUSE OF COMMONS
-            </p>
+        <div class="crest">✦</div>
 
-            <h1>
-                Members' Dining Room
-            </h1>
+        <p>THE HOUSE OF COMMONS</p>
 
-            <span class="intro-line"></span>
+        <h1>Members' Dining Room</h1>
 
-        </div>
+        <span class="intro-line"></span>
 
     </div>
 
+</div>
 
-    <!-- =====================================================
-         LOADING SCREEN
-         ===================================================== -->
 
-    <div class="loader"
-        id="loader">
+<!-- =====================================================
+     LOADER
+===================================================== -->
 
-        <div class="pizza">
+<div class="loader" id="loader">
 
-            <div class="pizza-base"></div>
+    <div class="pizza">
 
-            <div class="cheese"></div>
+        <div class="pizza-base"></div>
+        <div class="cheese"></div>
 
-            <div class="pepper p1"></div>
-            <div class="pepper p2"></div>
-            <div class="pepper p3"></div>
+        <div class="pepper p1"></div>
+        <div class="pepper p2"></div>
+        <div class="pepper p3"></div>
 
-        </div>
+    </div>
 
-        <p>
-            Preparing the menu...
+    <p>Preparing the menu...</p>
+
+</div>
+
+
+<!-- =====================================================
+     WEBSITE
+===================================================== -->
+
+<div class="site" id="site">
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <span class="eyebrow">
+            THE HOUSE OF COMMONS
+        </span>
+
+        <span class="hero-label">
+            DIGITAL MENU
+        </span>
+
+        <h1>
+            Members'
+            <br>
+            Dining Room
+        </h1>
+
+        <div class="gold-line"></div>
+
+        <p class="hero-subtitle">
+            A Taste of British Heritage
         </p>
 
-    </div>
-
-
-    <!-- =====================================================
-         MAIN WEBSITE
-         ===================================================== -->
-
-    <div class="site"
-        id="site">
-
-
-        <!-- =================================================
-             HERO
-             ================================================= -->
-
-        <header class="hero">
-
-            <div class="hero-overlay"></div>
-
-            <div class="hero-content">
-
-                <span class="eyebrow">
-                    THE HOUSE OF COMMONS
-                </span>
-
-                <span class="hero-label">
-                    DIGITAL MENU
-                </span>
-
-                <h1>
-                    Members'
-                    <br>
-                    Dining Room
-                </h1>
-
-                <div class="gold-line"></div>
-
-                <p class="hero-subtitle">
-                    A Taste of British Heritage
-                </p>
-
-                <p class="hero-description">
-                    A refined dining experience
-                    at the heart of Westminster.
-                </p>
-
-                <a href="#menu"
-                    class="hero-button">
-
-                    EXPLORE THE MENU
-
-                    <span>
-                        ↓
-                    </span>
-
-                </a>
-
-            </div>
-
-        </header>
-
-
-        <!-- =================================================
-             CATEGORY NAVIGATION
-             ================================================= -->
-
-        <nav class="category-nav">
-
-            <a href="#starters">
-
-                <span class="nav-icon">
-                    ◇
-                </span>
-
-                <span>
-                    Starters
-                </span>
-
-            </a>
-
-
-            <a href="#main-course">
-
-                <span class="nav-icon">
-                    ♜
-                </span>
-
-                <span>
-                    Main Course
-                </span>
-
-            </a>
-
-
-            <a href="#dessert">
-
-                <span class="nav-icon">
-                    ♢
-                </span>
-
-                <span>
-                    Dessert
-                </span>
-
-            </a>
-
-
-            <a href="#info">
-
-                <span class="nav-icon">
-                    ⓘ
-                </span>
-
-                <span>
-                    Information
-                </span>
-
-            </a>
-
-        </nav>
-
-
-        <!-- =================================================
-             MENU INTRO
-             ================================================= -->
-
-        <main id="menu">
-
-            <section class="menu-intro">
-
-                <span class="eyebrow">
-                    THE CURRENT SELECTION
-                </span>
-
-                <h2>
-                    Three Courses
-                </h2>
-
-                <p>
-                    Seasonal ingredients.
-                    Timeless flavours.
-                    <br>
-                    A menu inspired by British heritage.
-                </p>
-
-                <div class="gold-line"></div>
-
-            </section>
-
-
-            <!-- =================================================
-                 STARTERS
-                 ================================================= -->
-
-            <section class="menu-section"
-                id="starters">
-
-                <div class="section-overlay"></div>
-
-                <div class="section-content">
-
-                    <div class="section-number">
-                        01
-                    </div>
-
-                    <div class="section-heading">
-
-                        <span>
-                            STARTERS
-                        </span>
-
-                        <div class="small-line"></div>
-
-                    </div>
-
-
-                    <div class="dishes">
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Scallops
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                            <span class="tag">
-                                GF
-                            </span>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Beetroot
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                            <span class="tag">
-                                V · GF
-                            </span>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Rabbit
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Beef
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                            <span class="tag">
-                                GF
-                            </span>
-
-                        </article>
-
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 MAIN COURSE
-                 ================================================= -->
-
-            <section class="menu-section"
-                id="main-course">
-
-                <div class="section-overlay"></div>
-
-                <div class="section-content">
-
-                    <div class="section-number">
-                        02
-                    </div>
-
-                    <div class="section-heading">
-
-                        <span>
-                            MAIN COURSE
-                        </span>
-
-                        <div class="small-line"></div>
-
-                    </div>
-
-
-                    <div class="dishes">
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Venison
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                            <span class="tag">
-                                GF*
-                            </span>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Halibut
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                            <span class="tag">
-                                GF
-                            </span>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Corn-fed Chicken
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Courgette &amp; Spelt
-                                </h3>
-
-                                <p>
-                                    Seasonal vegetarian preparation.
-                                </p>
-                            </div>
-
-                            <span class="tag">
-                                VE
-                            </span>
-
-                        </article>
-
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 DESSERT
-                 ================================================= -->
-
-            <section class="menu-section"
-                id="dessert">
-
-                <div class="section-overlay"></div>
-
-                <div class="section-content">
-
-                    <div class="section-number">
-                        03
-                    </div>
-
-                    <div class="section-heading">
-
-                        <span>
-                            DESSERT
-                        </span>
-
-                        <div class="small-line"></div>
-
-                    </div>
-
-
-                    <div class="dishes">
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Pavlova
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                            <span class="tag">
-                                V · GF
-                            </span>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Chocolate &amp; Orange
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    Coconut &amp; Almond
-                                </h3>
-
-                                <p>
-                                    Seasonal preparation.
-                                </p>
-                            </div>
-
-                            <span class="tag">
-                                V · GF
-                            </span>
-
-                        </article>
-
-
-                        <article class="dish">
-
-                            <div>
-                                <h3>
-                                    British Cheese
-                                </h3>
-
-                                <p>
-                                    A selection of British cheese.
-                                </p>
-                            </div>
-
-                        </article>
-
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 INFORMATION
-                 ================================================= -->
-
-            <section class="info-section"
-                id="info">
-
-                <div class="info-overlay"></div>
-
-                <div class="info-content">
-
-                    <span class="eyebrow">
-                        MENU INFORMATION
-                    </span>
-
-                    <h2>
-                        Good to know
-                    </h2>
-
-                    <p>
-                        Please speak with the dining team
-                        regarding allergens, ingredients
-                        and dietary requirements.
-                    </p>
-
-
-                    <div class="legend">
-
-
-                        <div class="legend-item">
-
-                            <span class="legend-icon">
-                                GF
-                            </span>
-
-                            <span>
-                                Gluten Free
-                            </span>
-
-                        </div>
-
-
-                        <div class="legend-item">
-
-                            <span class="legend-icon">
-                                V
-                            </span>
-
-                            <span>
-                                Vegetarian
-                            </span>
-
-                        </div>
-
-
-                        <div class="legend-item">
-
-                            <span class="legend-icon">
-                                VE
-                            </span>
-
-                            <span>
-                                Vegan
-                            </span>
-
-                        </div>
-
-
-                        <div class="legend-item">
-
-                            <span class="legend-icon">
-                                *
-                            </span>
-
-                            <span>
-                                Ask the team
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="demo-note">
-
-                        <strong>
-                            Sample menu
-                        </strong>
-
-                        <p>
-                            Menu items, prices and availability
-                            should be confirmed with the dining
-                            team before launch.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </main>
-
-
-        <!-- =================================================
-             FOOTER
-             ================================================= -->
-
-        <footer>
-
-            <div class="footer-inner">
-
-                <div class="footer-mark">
-                    ✦
-                </div>
-
-                <h3>
-                    Members' Dining Room
-                </h3>
-
-                <p class="footer-location">
-                    HOUSE OF COMMONS · WESTMINSTER · LONDON
-                </p>
-
-                <div class="footer-line"></div>
-
-                <p class="footer-brand">
-                    Digital menu concept · Samar Hightech
-                </p>
-
-            </div>
-
-        </footer>
-
+        <p class="hero-description">
+            A refined dining experience at the heart of Westminster.
+        </p>
+
+        <a href="#menu" class="hero-button">
+            EXPLORE THE MENU
+            <span>↓</span>
+        </a>
 
     </div>
 
+</header>
 
-    <!-- =====================================================
-         JAVASCRIPT
-         ===================================================== -->
 
-    <script src="script.js"></script>
+<!-- CATEGORY NAV -->
+
+<nav class="category-nav">
+
+    <a href="#starters">
+        <span class="nav-icon">◇</span>
+        <span>Starters</span>
+    </a>
+
+    <a href="#main-course">
+        <span class="nav-icon">♜</span>
+        <span>Main Course</span>
+    </a>
+
+    <a href="#dessert">
+        <span class="nav-icon">♢</span>
+        <span>Dessert</span>
+    </a>
+
+    <a href="#info">
+        <span class="nav-icon">ⓘ</span>
+        <span>Info</span>
+    </a>
+
+</nav>
+
+
+<main id="menu">
+
+
+<!-- MENU INTRO -->
+
+<section class="menu-intro">
+
+    <span class="eyebrow">
+        THE CURRENT SELECTION
+    </span>
+
+    <h2>Three Courses</h2>
+
+    <p>
+        Seasonal ingredients. Timeless flavours.
+        <br>
+        A menu inspired by British heritage.
+    </p>
+
+    <div class="gold-line"></div>
+
+</section>
+
+
+<!-- STARTERS -->
+
+<section class="menu-section" id="starters">
+
+    <div class="section-content">
+
+        <div class="section-number">01</div>
+
+        <div class="section-heading">
+            <span>STARTERS</span>
+            <div class="small-line"></div>
+        </div>
+
+        <div class="dishes">
+
+            <article class="dish">
+                <div>
+                    <h3>Scallops</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+                <span class="tag">GF</span>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>Beetroot</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+                <span class="tag">V · GF</span>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>Rabbit</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>Beef</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+                <span class="tag">GF</span>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MAIN COURSE -->
+
+<section class="menu-section" id="main-course">
+
+    <div class="section-content">
+
+        <div class="section-number">02</div>
+
+        <div class="section-heading">
+            <span>MAIN COURSE</span>
+            <div class="small-line"></div>
+        </div>
+
+        <div class="dishes">
+
+            <article class="dish">
+                <div>
+                    <h3>Venison</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+                <span class="tag">GF*</span>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>Halibut</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+                <span class="tag">GF</span>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>Corn-fed Chicken</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>Courgette &amp; Spelt</h3>
+                    <p>Seasonal vegetarian preparation.</p>
+                </div>
+                <span class="tag">VE</span>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DESSERT -->
+
+<section class="menu-section" id="dessert">
+
+    <div class="section-content">
+
+        <div class="section-number">03</div>
+
+        <div class="section-heading">
+            <span>DESSERT</span>
+            <div class="small-line"></div>
+        </div>
+
+        <div class="dishes">
+
+            <article class="dish">
+                <div>
+                    <h3>Pavlova</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+                <span class="tag">V · GF</span>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>Chocolate &amp; Orange</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>Coconut &amp; Almond</h3>
+                    <p>Seasonal preparation.</p>
+                </div>
+                <span class="tag">V · GF</span>
+            </article>
+
+            <article class="dish">
+                <div>
+                    <h3>British Cheese</h3>
+                    <p>A selection of British cheese.</p>
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INFORMATION -->
+
+<section class="info-section" id="info">
+
+    <div class="info-content">
+
+        <span class="eyebrow">
+            MENU INFORMATION
+        </span>
+
+        <h2>Good to know</h2>
+
+        <p>
+            Please speak with the dining team regarding
+            allergens, ingredients and dietary requirements.
+        </p>
+
+        <div class="legend">
+
+            <div class="legend-item">
+                <span class="legend-icon">GF</span>
+                Gluten Free
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-icon">V</span>
+                Vegetarian
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-icon">VE</span>
+                Vegan
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-icon">*</span>
+                Ask the team
+            </div>
+
+        </div>
+
+        <div class="demo-note">
+
+            <strong>Sample menu</strong>
+
+            <p>
+                Menu items, prices and availability should be
+                confirmed with the dining team before launch.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-mark">✦</div>
+
+    <h3>Members' Dining Room</h3>
+
+    <p class="footer-location">
+        HOUSE OF COMMONS · WESTMINSTER · LONDON
+    </p>
+
+    <div class="footer-line"></div>
+
+    <p class="footer-brand">
+        Digital menu concept · Samar Hightech
+    </p>
+
+</footer>
+
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+window.addEventListener("load", function() {
+
+    const intro = document.getElementById("intro");
+    const loader = document.getElementById("loader");
+    const site = document.getElementById("site");
+
+    setTimeout(function() {
+
+        intro.classList.add("hide");
+
+        loader.classList.add("show");
+
+        setTimeout(function() {
+
+            loader.classList.remove("show");
+
+            site.classList.add("ready");
+
+        }, 1200);
+
+    }, 1700);
+
+});
+
+</script>
 
 </body>
-
 </html>
